@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string>
+using namespace std;
+class Person {
+protected:
+    string name;
+    double salary;
+public:
+    void getData() {
+        cout << "Enter name: ";
+        cin >> name;
+        cout << "Enter salary: ";
+        cin >> salary;
+    }
+    void displayData() {
+        cout << "Name: " << name << "\n";
+        cout << "Salary: " << salary << "\n";
+    }
+};
+class Admin : virtual public Person {
+public:
+    double bonus() {
+        return salary + 1000;
+    }
+};
+class Account : virtual public Person {
+public:
+    double bonus() {
+        return salary + 1000;
+    }
+};
+class Master : public Admin, public Account {
+public:
+    void displayData() {
+        Person::displayData();
+        cout << "Bonus: " << bonus() << "\n";
+    }
+    using Admin::bonus; 
+};
+int main() {
+    Master master;
+    master.getData();
+    master.displayData();
+    return 0;
+}
